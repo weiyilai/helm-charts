@@ -119,6 +119,14 @@ spec:
           ports:
             - containerPort: {{ . }}
           {{- end }}
+          {{- with .Values.configmapReload.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.configmapReload.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .Values.configmapReload.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
